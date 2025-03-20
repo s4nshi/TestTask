@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaUI.DataGrid.Pagination.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaUI.DataGrid.Pagination.PaginatedDataGrid"
+             x:DataType="vm:PaginatedDataGridViewModel">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<DataGrid Grid.Row="0"
+                  ItemsSource="{Binding DisplayedItems}"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True">
+		</DataGrid>
+
+		<StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+			<Button Content="First"
+                    Command="{Binding FirstPageCommand}"
+                    IsEnabled="{Binding CanGoToFirstPage}"
+                    Margin="5"/>
+			<Button Content="Previous"
+                    Command="{Binding PreviousPageCommand}"
+                    IsEnabled="{Binding CanGoToPreviousPage}"
+                    Margin="5"/>
+
+			<Button Content="1"
+                    Command="{Binding}"
+                    IsEnabled="{Binding}"
+                    Margin="5"/>
+			<Button Content="2"
+		            Command="{Binding}"
+		            IsEnabled="{Binding}"
+		            Margin="5"/>
+			<Button Content="3"
+					Command="{Binding}"
+					IsEnabled="{Binding}"
+					Margin="5"/>
+			<Button Content="4"
+					Command="{Binding}"
+					IsEnabled="{Binding}"
+					Margin="5"/>
+			<Button Content="5"
+					Command="{Binding}"
+					IsEnabled="{Binding}"
+					Margin="5"/>
+
+			<!--<ItemsControl ItemsSource="{Binding PageButtons}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Button Content="{Binding}"
+                               
+                                CommandParameter="{Binding}"
+                                Margin="5"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>-->
+
+			<Button Content="Next"
+                    Command="{Binding NextPageCommand}"
+                    IsEnabled="{Binding CanGoToNextPage}"
+                    Margin="5"/>
+			<Button Content="Last"
+                    Command="{Binding LastPageCommand}"
+                    IsEnabled="{Binding CanGoToLastPage}"
+                    Margin="5"/>
+		</StackPanel>
+	</Grid>
+</UserControl>
