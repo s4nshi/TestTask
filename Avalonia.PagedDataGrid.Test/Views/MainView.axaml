@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Avalonia.PagedDataGrid.Test.ViewModels"
+			 xmlns:models="clr-namespace:Avalonia.PagedDataGrid.Test.Models"
+			 xmlns:pqdgc="clr-namespace:Avalonia.PagedDataGrid.Controls;assembly=Avalonia.PagedQueryableDataGrid"
+			 xmlns:pedgc="clr-namespace:Avalonia.PagedDataGrid.Controls;assembly=Avalonia.PagedEnumerableDataGrid"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Avalonia.PagedDataGrid.Test.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainViewModel />
+	</Design.DataContext>
+	<Grid ColumnDefinitions="*, *">
+		<pedgc:PagedEnumerableDataGrid Grid.Column="0"
+									   ItemsSource="{Binding Movies_e}"
+								       AutoGenerateColumns="False"
+									   IsReadOnly="True"
+									   Margin="10">
+			<pedgc:PagedEnumerableDataGrid.DataGridColumns>
+				<DataGridTextColumn x:DataType="models:Movie" Header="Id" Binding="{Binding Id}"/>
+				<DataGridTextColumn x:DataType="models:Movie" Header="Title" Binding="{Binding Title}"/>
+				<DataGridTextColumn x:DataType="models:Movie" Header="ReleaseDate" Binding="{Binding ReleaseDate}"/>
+				<DataGridTextColumn x:DataType="models:Movie" Header="Genre" Binding="{Binding Genre}"/>
+				<DataGridTextColumn x:DataType="models:Movie" Header="Price" Binding="{Binding Price}"/>
+			</pedgc:PagedEnumerableDataGrid.DataGridColumns>
+		</pedgc:PagedEnumerableDataGrid>
+		<pqdgc:PagedQueryableDataGrid Grid.Column="1"
+									  ItemsSource="{Binding Movies_q}"
+								      AutoGenerateColumns="False"
+								      IsReadOnly="True"
+									  Margin="10">
+			<pqdgc:PagedQueryableDataGrid.DataGridColumns>
+				<DataGridTextColumn Header="Id" Binding="{ReflectionBinding Id}"/>
+				<DataGridTextColumn Header="Title" Binding="{ReflectionBinding Title}"/>
+				<DataGridTextColumn Header="ReleaseDate" Binding="{ReflectionBinding ReleaseDate}"/>
+				<DataGridTextColumn Header="Genre" Binding="{ReflectionBinding Genre}"/>
+				<DataGridTextColumn Header="Price" Binding="{ReflectionBinding Price}"/>
+			</pqdgc:PagedQueryableDataGrid.DataGridColumns>
+		</pqdgc:PagedQueryableDataGrid>
+	</Grid>
+</UserControl>
