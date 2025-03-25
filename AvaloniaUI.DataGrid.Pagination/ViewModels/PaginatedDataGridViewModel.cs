@@ -94,7 +94,7 @@ namespace AvaloniaUI.DataGrid.Pagination.ViewModels
             UpdateDisplayedItems();
             UpdatePageButtons();
         }
-        public void GoToPage(int pageNumber) // Измените на public
+        public void GoToPage(int pageNumber) 
         {
             if (pageNumber < 1 || pageNumber > TotalPages) return;
 
@@ -120,7 +120,7 @@ namespace AvaloniaUI.DataGrid.Pagination.ViewModels
             Console.WriteLine($"Current Page: {_currentPage}, Start Index: {startIndex}, End Index: {endIndex}, Displayed Items Count: {DisplayedItems.Count}");
         }
 
-        public void SetItems(IEnumerable<HistoryPosition> items) // Изменено на HistoryPosition
+        public void SetItems(IEnumerable<HistoryPosition> items) 
         {
             _allItems = new ObservableCollection<HistoryPosition>(items);
             UpdateDisplayedItems();
