@@ -1,0 +1,54 @@
+<UserControl x:Name="PaginatedDataGridd"
+	         xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaUI.DataGrid.Pagination.ViewModels"
+			 xmlns:local="using:AvaloniaUI.DataGrid.Pagination"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaUI.DataGrid.Pagination.PaginatedDataGrid"
+             x:DataType="vm:PaginatedDataGridViewModel">
+
+
+	<UserControl.DataContext>
+		<vm:PaginatedDataGridViewModel />
+	</UserControl.DataContext>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+			<Button Content="First" Command="{Binding GoToFirstPageCommand}"/>
+			<Button Content="Previous" Command="{Binding GoToPreviousPageCommand}"/>
+
+			<!-- Динамическое создание кнопок для перехода на страницы -->
+			<ItemsControl ItemsSource="{Binding PageButtons}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							<!--При обращении к GoToPageCommand через DataContext ошибка
+									AVLN2000 Unable to resolve property or method of name 'GoToPageCommand' on type 'System.Object'-->
+							<Button Content="{Binding}"
+									Command="{Binding DataContext, 
+                        RelativeSource={RelativeSource AncestorType=UserControl}}"
+									CommandParameter="{Binding}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
+			<Button Content="Next" Command="{Binding GoToNextPageCommand}"/>
+			<Button Content="Last" Command="{Binding GoToLastPageCommand}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

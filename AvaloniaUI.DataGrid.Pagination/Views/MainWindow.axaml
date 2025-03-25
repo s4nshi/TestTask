@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaUI.DataGrid.Pagination.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaUI.DataGrid.Pagination.Views.MainWindow"
+		xmlns:local="using:AvaloniaUI.DataGrid.Pagination"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaUI.DataGrid.Pagination">
+
+	<Design.DataContext>
+		<local:PaginatedDataGrid/>
+	</Design.DataContext>
+
+
+	<Grid DockPanel.Dock="Top">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />	
+			<RowDefinition Height="Auto" />			
+		</Grid.RowDefinitions>
+
+		<ScrollViewer Grid.Row="0">
+			<DataGrid x:Name="positionsHistoryGrid"
+					  Grid.Row="0"
+					  ItemsSource="{Binding PaginatedViewModel.DisplayedItems}"
+					  AutoGenerateColumns="True"
+					  IsReadOnly="True"
+					  VerticalAlignment="Stretch"
+					  HorizontalAlignment="Stretch">
+			</DataGrid>
+		</ScrollViewer>
+
+		<local:PaginatedDataGrid x:Name="paginatedDataGrid"
+                         PageSize="20"
+                         NumPageButtons="5"
+                         Grid.Row="1"
+                         VerticalAlignment="Bottom"
+                         HorizontalAlignment="Center"
+						 DataContext="{Binding PaginatedViewModel}"/>
+		
+		<Button Grid.Row="1" Content="Generate Trade History" Command="{Binding GenerateTradeHistoryCommand}" VerticalAlignment="Bottom"/>
+		
+	</Grid>
+
+</Window>
